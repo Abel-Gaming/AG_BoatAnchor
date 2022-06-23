@@ -32,12 +32,14 @@ Citizen.CreateThread(function()
 			DisableControlAction(0, 233, true)
 			
 			-- Check for key presses
-			if IsDisabledControlJustPressed(0, 71) or IsDisabledControlJustPressed(0, 129) or IsDisabledControlJustPressed(0, 232) or IsDisabledControlJustPressed(0, 72) or IsDisabledControlJustPressed(0, 130) or IsDisabledControlJustPressed(0, 233) then
-				if Config.UseSWTNotifications then
-					TriggerEvent("swt_notifications:Negative", "Boat Still Anchored", "You must unanchor your boat first!", "top", 5000, true)
-				else
-					ShowNotification("~r~You must unanchor your boat first!")
-				end				
+			if IsDisabledControlJustPressed(0, 71) or IsDisabledControlJustPressed(0, 129) or IsDisabledControlJustPressed(0, 232) or IsDisabledControlJustPressed(0, 72) or IsDisabledControlJustPressed(0, 130) or IsDisabledControlJustPressed(0, 233) then		
+				if IsPedInAnyBoat(PlayerPedId()) then
+					if Config.UseSWTNotifications then
+						TriggerEvent("swt_notifications:Negative", "Boat Still Anchored", "You must unanchor your boat first!", "top", 5000, true)
+					else
+						ShowNotification("~r~You must unanchor your boat first!")
+					end		
+				end		
 			end
 		end
 	end
